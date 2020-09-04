@@ -6,17 +6,26 @@ import edu.eci.arem.Calculators.Calculator;
 import spark.Request;
 import spark.Response;
 
+
 /**
- * Hello world!
+ * Esta clase es la clase de inicio de un server principal que se encrag de resivir peticiones para realizar calculos
  *
  */
 public class App 
 {
+	/**
+     * Este metodo main inicia el servidor Fachada y define algunas peticiones y respuestas haciendo uso 
+     * de algunas funciones lambda
+     */
     public static void main( String[] args )
     {
     	port(getPort());
     	get("/respuesta", (req, res) ->  resultsView(req, res));
     }
+    /**
+     *Este metodo se encarga de retonar el puerto por defecto que esta definido en una variable de entorno 
+     *para correr el servidor web fachada sobre ese puerto.
+     */
     
  private static int getPort() {
    	 if (System.getenv("PORT") != null) {
@@ -24,13 +33,16 @@ public class App
    	 }
    	 return 5000; //returns default port if heroku-port isn't set
    }
-
+ /**
+  *Este metodo contruye la vista resultView a partir una peticion que le solicita a otro server fachada
+  *este server principal se encarga de realizar los calculos de las peticiones haciendo uso de la calculadora trigonometrica
+  *
+  * @param req Tiene la informacion de la peticion que llega al servidor.
+  * @param res Tiene la informacion con la respuesta del servidor.
+  * @return String con la informacion html de la vista de entrada.
+  */
 private static String resultsView(Request req, Response res) {
-	 System.out.println("legooooooooooooooooooooooooooooooooo");
-	 System.out.println(req);
 	 String funcion=req.queryParams("funcion");
-	 System.out.println("xddddddddddddddddddddd");
-	 System.out.println(funcion);
 	 String datos = req.queryParams("datos");
 	 Calculator cal= new Calculator(); 
 	 double respuesta = cal.calculate(funcion,Double.parseDouble(datos));
