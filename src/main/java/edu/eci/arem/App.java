@@ -15,7 +15,6 @@ public class App
     public static void main( String[] args )
     {
     	port(getPort());
-    	get("/", (req, res) ->  inputView(req, res));
     	get("/respuesta", (req, res) ->  resultsView(req, res));
     }
     
@@ -26,30 +25,12 @@ public class App
    	 return 5000; //returns default port if heroku-port isn't set
    }
 
-private static String  inputView(Request req, Response res) {
-    String view = "<!DOCTYPE html>"
-            + "<html>"
-            + "<body style=\"background-color:#CCCC00;\">"
-            +"<center>"
-            + "<h2>Calculadora Trigonometrica</h2>"
-            + "  <br><br>"
-			+ "<h2>Intrucciones : Porfavor ingrese la funcion que desea calcular pueder ser sin,cos o tan y escriba el numero en radianes</h2>"
-			+ "<form action=\"/respuesta\">"
-			+"Funcion Trogometrica: "
-			+ "  <input type=\"text\" name=\"funcion\">"
-            + "  <br><br>"
-            +"Numero en Radianes: "
-            + "  <input type=\"text\" name=\"datos\">"
-            + "  <br><br>"
-            + "  <input type=\"submit\" value=\"Calcular\">"
-            + "</form>"
-            +"</center>"
-            + "</body>"
-            + "</html>";
-    return view;
-	}
 private static String resultsView(Request req, Response res) {
+	 System.out.println("legooooooooooooooooooooooooooooooooo");
+	 System.out.println(req);
 	 String funcion=req.queryParams("funcion");
+	 System.out.println("xddddddddddddddddddddd");
+	 System.out.println(funcion);
 	 String datos = req.queryParams("datos");
 	 Calculator cal= new Calculator(); 
 	 double respuesta = cal.calculate(funcion,Double.parseDouble(datos));
