@@ -23,7 +23,6 @@ git clone https://github.com/fernando-b15/CalculadoraTrigonometrica
 
 Posteriormente desde linea comandos ingrese al directorio de la aplicacion con el siguinete comando :
 
-![image3](https://github.com/fernando-b15/Arem-Taller2/blob/master/img/clone.PNG)
 
 ~~~
 cd Arem-Taller2
