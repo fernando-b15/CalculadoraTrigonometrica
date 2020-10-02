@@ -1,7 +1,15 @@
 package edu.eci.arem;
 
 import static spark.Spark.*;
+
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import edu.eci.arem.Calculators.Calculator;
 import spark.Request;
 import spark.Response;
@@ -17,21 +25,25 @@ public class App
      * Este metodo main inicia el servidor Fachada y define algunas peticiones y respuestas haciendo uso 
      * de algunas funciones lambda
      */
-    public static void main( String[] args )
+    public static void main( String[] args ) throws NoSuchAlgorithmException
     {
     	port(getPort());
+    	secure("keystores/ecikeystore.p12","456123","keystores/myTrustStore", "789123");
     	get("/respuesta", (req, res) ->  resultsView(req, res));
+    	
     }
     /**
      *Este metodo se encarga de retonar el puerto por defecto que esta definido en una variable de entorno 
      *para correr el servidor web fachada sobre ese puerto.
+     * @throws NoSuchAlgorithmException 
      */
-    
+  
+ 
  private static int getPort() {
    	 if (System.getenv("PORT") != null) {
    		 return Integer.parseInt(System.getenv("PORT"));
    	 }
-   	 return 5000; //returns default port if heroku-port isn't set
+   	 return 4000; //returns default port if heroku-port isn't set
    }
  /**
   *Este metodo contruye la vista resultView a partir una peticion que le solicita a otro server fachada
